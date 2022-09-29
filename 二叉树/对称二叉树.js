@@ -1,7 +1,6 @@
 function isSymmetric (root) {
-  if (root == null) {
-    return true
-  }
+  if (root == null) return true
+
   return isSymmetricHelper(root.left, root.right)
 
 };

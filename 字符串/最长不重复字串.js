@@ -7,13 +7,27 @@ var lengthOfLongestSubstring = function (s) {
       str.splice(0, index + 1)
     }
     str.push(s[i])
+    console.log(str)
     maxlength = Math.max(maxlength, str.length)
   }
   return maxlength
 }
-console.log(lengthOfLongestSubstring("abcabcbb"))
-let c = 3, d = 4
-c = c ^ d
-d = c ^ d
-c = c ^ d
-console.log(c, d)
+console.log(lengthOfLongestSubstring("aabaab!bb"))
+
+
+var frequencySort = function (nums) {
+  let map = new Map()
+  for (let i = 0; i < nums.length; i++) {
+    if (map.get(nums[i])) {
+      map.set(nums[i], map.get(nums[i]) + 1)
+    } else {
+      map.set(nums[i], 1)
+    }
+  }
+  nums.sort((a, b) => {
+    if (map.get(a) === map.get(b)) return b - a
+    return map.get(a) - map.get(b)
+  })
+  return nums
+}
+console.log(frequencySort([2, 3, 3, 4, 4]))

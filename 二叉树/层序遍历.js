@@ -16,3 +16,4 @@ function sequencetravelsal (root) {  // 输出 [[root],[1,2],[3,4,6]]
   return res
 }
 
+

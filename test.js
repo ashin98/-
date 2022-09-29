@@ -29,16 +29,91 @@ function numSort (num) {
 }
 console.log(numSort([0, 2, 3, 4, 5, 6, 8, 9, 10, 11]))
 
-let arr = ['h', 'e', 'l', 'l', 'o']
-arr.forEach(e => {
-  if (e == 'l') return
-  console.log(e)
-})
-arr.pop()
-arr.unshift('a')
-arr.push('c')
-console.log(arr)
-arr.splice(2, 3)
-console.log(arr)
+function solution (list) {
+  let newList = []
+  for (let item = 0; item < list.length - 1; item++) {
+    // 将 原数组 和 彼此之间的差值 两两穿插合成一个新字符串，如果是相差1则插入@，反之则插入！ 
+    newList.push(list[item], list[item + 1] - list[item] === 1 ? '@' : '!')
+  }
+  console.log(newList)
+  // 最后一个数没有尾端的差值，因此直接插入即可 
+  newList.push(list[list.length - 1])
+  // 将连续三个连着@的值转化为'-'连接的形式，最后再去除@和！符号
+  return newList.join('').replace(/(-?\d*)@(-?\d*@)+(-?\d*)/g, '$1-$3').replace(/[@!]/g, ',')
+}
 
+console.log(solution([0, 2, 3, 4, 5, 6, 8, 9, 10, 11]))
 
+let input = [1, 2, 3, 4, 5, 7, 8, 9, 12, 14, 15, 16]
+let output = []
+
+let len = input.length
+let i
+for (i = 0; i < len; i++) {
+  console.log(i)
+  let start = input[i] // 1
+  let j
+  for (j = i; j < len; j++) {
+    if (input[j] + 1 !== input[j + 1]) {
+      break
+    }
+  }
+  i = j // i=4
+  if (start == input[j]) {
+    output.push(start)
+  } else {
+    output.push(start + "->" + input[j])
+  }
+}
+
+Array.prototype.add = function () {
+  return this.reduce((total, item) => {
+    return total + item
+  })
+}
+console.log(['a', 'b', 'c'].add())
+
+let arr4 = { a: 1, b: 2 }
+let arr5 = { a: 1, b: 2 }
+arr6 = [1, 2, 3]
+console.log(arr6.entries())
+
+var rotatedDigits = function (n) {
+
+  const map = new Map([[0, false], [1, false], [2, true], [3, false], [4, false], [5, true], [6, true], [7, false], [8, false], [9, true]])
+  let num = 0
+  function test (i) {
+
+    if (i === 2 || i === 5 || i === 6 || i === 9) return true
+    return false
+  }
+  for (let i = 1; i <= n; i++) {
+    if (i >= 10) {
+      let res = i + ''
+      let arr = res.split("")
+      arr = arr.map(Number)
+      const test = [0, 1, 2, 5, 6, 8, 9]
+      const test2 = [2, 5, 6, 9]
+      let p = 0
+      let q = 0
+      arr.forEach(item => {
+        if (test.indexOf(item) !== -1) {
+          p++
+        }
+        if (test2.indexOf(item) !== -1) {
+          q++
+        }
+      })
+      console.log(p, q)
+      if (p > 0 && q > 0) {
+        num++
+        p = 0
+        q = 0
+      }
+    }
+    if (map.get(i) === true) num++
+
+  }
+  return num
+}
+console.log(rotatedDigits(28))

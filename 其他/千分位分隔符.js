@@ -112,28 +112,3 @@ function numFormat2 (num) {
 }
 console.log(numFormat2(num))
 
-var permute = function (nums) {
-  const res = []
-  const path = []
-  backtracking(nums, nums.length, [])
-  return res
-
-  function backtracking (nums, len, used) {
-    if (path.length == len) {
-      res.push([...path])
-      console.log(path)
-
-    }
-    //单层递归逻辑
-    for (let i = 0; i < len; i++) {
-      if (used[i]) continue
-      path.push(nums[i])
-      used[i] = true //同一个，已经存在了
-      backtracking(nums, len, used)
-      path.pop()
-      used[i] = false
-    }
-  }
-}
-console.log(permute([1, 2, 3]))
-

@@ -1,0 +1,57 @@
+<!--实现图片懒加载 原理-当图片出现在频幕中把data-src的地址给src -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>图片懒加载</title>
+  <style>
+    div {
+      width: 400px;
+      height: 500px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div><img src="./imgs/1.jpg" data-src="./imgs/avatar.jpg"></div>
+  <div><img src="./imgs/1.jpg" data-src="./imgs/avatar.jpg"></div>
+  <div><img src="./imgs/1.jpg" data-src="./imgs/avatar.jpg"></div>
+  <div><img src="./imgs/1.jpg" data-src="./imgs/avatar.jpg"></div>
+  <div><img src="./imgs/1.jpg" data-src="./imgs/avatar.jpg"></div>
+  <div><img src="./imgs/1.jpg" data-src="./imgs/avatar.jpg"></div>
+  <div><img src="./imgs/1.jpg" data-src="./imgs/avatar.jpg"></div>
+  <div><img src="./imgs/1.jpg" data-src="./imgs/avatar.jpg"></div>
+  <div><img src="./imgs/1.jpg" data-src="./imgs/avatar.jpg"></div>
+  <div><img src="./imgs/1.jpg" data-src="./imgs/avatar.jpg"></div>
+  <div><img src="./imgs/1.jpg" data-src="./imgs/avatar.jpg"></div>
+  <div><img src="./imgs/1.jpg" data-src="./imgs/avatar.jpg"></div>
+
+  <script>
+    window.onload = function () {
+      const imgs = [...document.getElementsByTagName('img')]
+      const originHeight = document.documentElement.clientHeight // 可见区域高度
+      function lazy () {
+        let scrop = document.documentElement.scrollTop // 滚动条高度
+        imgs.forEach(item => {
+          if (item.offsetTop + 400 < originHeight + scrop) {  // 图片距离顶部的高度 小于 可见区域的高度+滚动条高度 则加载图片 
+            if (item.getAttribute('src') === './imgs/1.jpg') {
+              let data = item.getAttribute('data-src')
+              item.setAttribute('src', data)
+            }
+          }
+        })
+      }
+      lazy()
+      window.onscroll = function () { // 每次滚动执行函数
+        lazy()
+      }
+    }
+
+  </script>
+</body>
+
+</html>
