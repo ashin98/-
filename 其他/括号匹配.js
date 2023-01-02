@@ -12,5 +12,3 @@ function inval (str) {
 }
 
 console.log(inval('{{}}'))
-console.log(parseInt('018'))
-console.log(parseFloat('00998'))

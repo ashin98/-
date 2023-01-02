@@ -5,7 +5,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Document</title>\
+  <script src="./test.js"></script>
   <style>
     .tixing {
       width: 100px;
@@ -44,7 +45,33 @@
     // console.log(a.fn()() == (a.fn())())//true
     // console.log(a.fn().call(this)) // 20
     // console.log(a.fn().call(a)) // 15
+    // var a = 0
+    // if (true) {
+    //   console.log(a)
+    //   a = 1
+    //   function a () { }
+    //   a = 5
+    //   console.log(a)
 
+    // }
+    // console.log(a)
+    var num = 10
+    let obj = { num: 20 }
+    obj.fn = (function (num) {
+      console.log(this)
+      this.num = num * 3
+      num++
+      return function (n) {
+        this.num += n
+        num++
+        console.log(num)
+      }
+    })(obj.num)
+    let fn = obj.fn
+    fn(5)
+    console.log(num)
+    obj.fn(10)
+    console.log(num, obj.num)
   </script>
 </body>
 

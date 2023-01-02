@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>瀑布流</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 00000;
+        }
+
+        .item {
+            padding: 5px;
+            border: 2px solid #ccc;
+            float: left;
+        }
+
+        .item img {
+            width: 130px;
+        }
+    </style>
+</head>
+<script>
+    window.onload = function () {
+        // 获取外层容器宽度
+        const container = document.getElementsByClassName('container')[0];
+        const containerW = container.offsetWidth;
+        // 获取所有图片
+        const items = document.getElementsByClassName('item');
+        // 一排能容纳多少张图片
+        const itemW = items[0].offsetWidth;
+        const nums = Math.floor(containerW / itemW);
+        // 用于收集第一排图片高度
+        const imgH = [];
+
+        // 遍历所有图片
+        for (let i = 0; i < items.length; i++) {
+            // 第一排的图片
+            if (i < nums) {
+                imgH.push(items[i].clientHeight)
+            } else {
+                // 设置对象存储第一排最小高度的图片信息
+                let obj = {
+                    minH: imgH[0],
+                    minIndex: 0
+                }
+                for (let j = 0; j < imgH.length; j++) {
+                    if (imgH[j] < obj.minH) {
+                        obj.minH = imgH[j];
+                        obj.minIndex = j;
+                    }
+                }
+                // 这里的 i 就是第二排的 图片了
+                items[i].style.position = 'absolute';
+                // 设置定位
+                items[i].style.left = items[obj.minIndex].offsetLeft + 'px';
+                items[i].style.top = obj.minH + 'px';
+                // 重置 排序完的高度
+                imgH[obj.minIndex] = imgH[obj.minIndex] + items[i].offsetHeight;
+            }
+        }
+    }
+</script>
+
+<body>
+    <div class="container">
+        <div class="item">
+            <img src="./imgs/5.webp" alt="">
+        </div>
+        <div class="item">
+            <img src="./imgs/1.jpg" alt="">
+        </div>
+        <div class="item">
+            <img src="./imgs/1.webp" alt="">
+        </div>
+
+        <div class="item">
+            <img src="./imgs/2.webp" alt="">
+        </div>
+        <div class="item">
+            <img src="./imgs/8.webp" alt="">
+        </div>
+        <div class="item">
+            <img src="./imgs/3.webp" alt="">
+        </div>
+        <div class="item">
+            <img src="./imgs/4.webp" alt="">
+        </div>
+        <div class="item">
+            <img src="./imgs/7.webp" alt="">
+        </div>
+
+        <div class="item">
+            <img src="./imgs/6.webp" alt="">
+        </div>
+
+        <div class="item">
+            <img src="./imgs/9.webp" alt="">
+        </div>
+        <div class="item">
+            <img src="./imgs/5.webp" alt="">
+        </div>
+        <div class="item">
+            <img src="./imgs/1.jpg" alt="">
+        </div>
+        <div class="item">
+            <img src="./imgs/1.webp" alt="">
+        </div>
+
+        <div class="item">
+            <img src="./imgs/2.webp" alt="">
+        </div>
+        <div class="item">
+            <img src="./imgs/8.webp" alt="">
+        </div>
+        <div class="item">
+            <img src="./imgs/3.webp" alt="">
+        </div>
+        <div class="item">
+            <img src="./imgs/4.webp" alt="">
+        </div>
+        <div class="item">
+            <img src="./imgs/7.webp" alt="">
+        </div>
+
+        <div class="item">
+            <img src="./imgs/6.webp" alt="">
+        </div>
+
+        <div class="item">
+            <img src="./imgs/9.webp" alt="">
+        </div>
+        <div class="item">
+            <img src="./imgs/5.webp" alt="">
+        </div>
+        <div class="item">
+            <img src="./imgs/1.jpg" alt="">
+        </div>
+        <div class="item">
+            <img src="./imgs/1.webp" alt="">
+        </div>
+
+        <div class="item">
+            <img src="./imgs/2.webp" alt="">
+        </div>
+        <div class="item">
+            <img src="./imgs/8.webp" alt="">
+        </div>
+        <div class="item">
+            <img src="./imgs/3.webp" alt="">
+        </div>
+        <div class="item">
+            <img src="./imgs/4.webp" alt="">
+        </div>
+        <div class="item">
+            <img src="./imgs/7.webp" alt="">
+        </div>
+
+        <div class="item">
+            <img src="./imgs/6.webp" alt="">
+        </div>
+
+        <div class="item">
+            <img src="./imgs/9.webp" alt="">
+        </div>
+    </div>
+</body>
+
+</html>
